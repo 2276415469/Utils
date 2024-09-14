@@ -11,6 +11,7 @@ DslParse文件，为领域特定语言解析器。
 3、你有语法解析需求，但是现在框架或者轮子都太过沉重，你需要一个简单轻便的解析器，这个文件可以作为你很好的基础底盘。
 
 举例：
+![image](https://github.com/user-attachments/assets/683c94a0-7e18-4430-ab3c-a77c171bc363)
 
    将DSL字符串  (((a=1) AND (b!=2)) OR ((a2=1) AND (b2!=2)) ) OR (c >=3) AND (d < 4) 解析为树形结构
    
