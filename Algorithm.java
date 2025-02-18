@@ -2548,6 +2548,35 @@ public class Algorithm {
     quick(params, leftPoint + 1, rightIndex);
   }
 
+ public static void quickSort(int[] param, int leftIndex, int rightIndex) {
+        if (param == null || leftIndex > rightIndex) {
+            return;
+        }
+        int target = param[leftIndex];
+        int left = leftIndex, right = rightIndex;
+        while (left < right) {
+            while (left < right && param[right] >= target) {
+                right--;
+            }
+            if (left < right) {
+                param[left] = param[right];
+                left++;
+            }
+
+            while (left < right && param[left] < target) {
+                left++;
+            }
+            if (left < right) {
+                param[right] = param[left];
+                right--;
+            }
+
+        }
+        param[left] = target;
+        quickSort(param, leftIndex, left - 1);
+        quickSort(param, left + 1, rightIndex);
+    }
+
 
   @Override
   public boolean equals(Object obj) {
