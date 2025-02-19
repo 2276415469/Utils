@@ -2194,42 +2194,37 @@ public class Algorithm {
   }
 
 
-  // 插入单向有序递增link
-  public static ListNode insertOrderLink(ListNode root, ListNode key) {
-
-    if (root == null) {
-      return key;
-    }
-    int i = 0;
-
-    // 虚构一个最前面的指针用于做插入 用于解决需要插入时 找不到前一个节点
-    ListNode loop1 = new ListNode();
-    loop1.next = root;
-    ListNode loop2 = root;
-
-    while (loop2 != null) {
-      // 递增必须是小于时插入 防止同值错误
-      if (loop2.val > key.val) {
-        // 特殊处理头指针
-        if (i == 0) {
-          loop1.val = key.val;
-          return loop1;
+  // 插入单向有序递增link 
+  public static ListNode insertOrderLink(ListNode root, int target) {
+        if (root == null) {
+            return null;
         }
-        // 正常处理
-        loop1.next = key;
-        key.next = loop2;
-        return root;
-      }
-      // 循环
-      loop1 = loop1.next;
-      loop2 = loop2.next;
-      i++;
-    }
+        // 特殊处理头部
+        if (target < root.val) {
+            ListNode listNode = new ListNode(target);
+            listNode.next = root;
+            return listNode;
+        }
 
-    // 如果是最大值
-    loop1.next = key;
-    return root;
-  }
+        ListNode loop1 = root;
+        ListNode loop2 = root.next;
+        while (loop2 != null) {
+            if (target < loop2.val) {
+                ListNode listNode = new ListNode(target);
+                loop1.next = listNode;
+                listNode.next = loop2;
+                return root;//结束函数
+            } else {
+                loop1 = loop1.next;
+                loop2 = loop2.next;
+            }
+        }
+        // 走到这里说明都不符合 处理尾部
+        ListNode listNode = new ListNode(target);
+        loop1.next = listNode;
+        listNode.next = null;
+        return root;
+    }
 
 
   // 创建link
