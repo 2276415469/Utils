@@ -2313,6 +2313,7 @@ public class Algorithm {
 
 
   // 无重复的最长子串长度 滑动窗口 左右维护
+  // 右边界负责加值进结果 规避边界问题
   public static int noRepeatZi(String param) {
     if (param == null || param.equals("")) {
       return 0;
