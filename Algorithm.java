@@ -1101,7 +1101,7 @@ public class Algorithm {
     arr[b] = temp;
   }
 
-  // Find k numbers that sum to m
+  // Find k numbers that sum to m 这样写应该是因为要求输出组成部分并且要去重 重点在于用k来标识选择了几个了已经
   public static List<List<Integer>> kNumber2SumM(List<Integer> param, int k, int m) {
 
     List<List<Integer>> result = new ArrayList<>();
