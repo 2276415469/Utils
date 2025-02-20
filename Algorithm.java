@@ -1647,7 +1647,7 @@ public class Algorithm {
     boolean rightResult = isSearchTree(tree.right, tree.val, 2);
     return leftResult & rightResult;
   }
-
+  // result 应该是层级为key 层内元素为value 然后遍历输出最右边的一个
   public static void treeRightView(TreeNode tree) {
     Map<Integer, List<Integer>> result = new LinkedHashMap<>();
 
