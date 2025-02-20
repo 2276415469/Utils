@@ -1598,6 +1598,7 @@ public class Algorithm {
 
 
   // 数的最大直径
+  // 直径就是一棵树下的两个距离最远的节点之间的距离 在这里就是左子树高度+右子树高度
   public static int diameterOfBinaryTree(TreeNode root) {
     if (root == null) {
       return 0;
@@ -1613,7 +1614,8 @@ public class Algorithm {
     return max2;
   }
 
-
+  // 树的递归 往往是传下去 递归上来
+  // 树的高度=最大深度
   public static int getTreeHeight(TreeNode root) {
     if (root == null) return 0;
     int leftHeight = getTreeHeight(root.left);
