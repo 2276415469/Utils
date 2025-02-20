@@ -1572,7 +1572,7 @@ public class Algorithm {
     return new TreeNode(-1);
   }
 
-
+  // 是否为相同的树
   public static boolean isSymmetry(TreeNode root) {
     return isSymmetry(root.left, root.right);
   }
@@ -1608,7 +1608,7 @@ public class Algorithm {
     int ownDiameter = leftHeight + rightHeight;
     int leftDiameter = diameterOfBinaryTree(root.left);
     int rightDiameter = diameterOfBinaryTree(root.right);
-
+    // 会有自己直径 小于子树直径的情况出现 所以需要三者同时比较
     int max = Math.max(ownDiameter, leftDiameter);
     int max2 = Math.max(max, rightDiameter);
     return max2;
