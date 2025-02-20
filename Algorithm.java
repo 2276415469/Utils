@@ -1531,7 +1531,7 @@ public class Algorithm {
   }
 
 
-  // 路径和
+  // 路径和是否可以满足为某值
   public static boolean pathSum(TreeNode root, int targetValue, int currentValue) {
     if (root == null) {
       return false;
@@ -1551,6 +1551,7 @@ public class Algorithm {
 
 
   // 二叉搜索树中两节点的公共祖先
+  // 定义 左子树的所有节点值小于 右子树的所有节点值大于 左右子树也分别是二叉搜索树 不允许有重复的键值
   public static TreeNode commonAncestor(TreeNode root, int key1, int key2) {
     int max = Math.max(key1, key2);
     int min = Math.min(key1, key2);
@@ -1572,8 +1573,11 @@ public class Algorithm {
     return new TreeNode(-1);
   }
 
-  // 是否为相同的树
+  // 是否为对称的树 指一棵二叉树能够沿着其中轴线对折后，左子树与右子树形成镜像对称
   public static boolean isSymmetry(TreeNode root) {
+     if (root == null) {
+            return true;
+        }
     return isSymmetry(root.left, root.right);
   }
 
