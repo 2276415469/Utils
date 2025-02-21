@@ -1295,7 +1295,8 @@ public class Algorithm {
     return result;
   }
 
-
+  // 是否为完全二叉树 所有节点之间没有null 有null以后全为null
+  // 通过把层次便利的结果 放在list中 遍历判断
   public static boolean isCompleteBinaryTree(TreeNode root) {
     LinkedList<TreeNode> next = new LinkedList<>();
     next.add(root);
