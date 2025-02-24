@@ -1134,26 +1134,28 @@ public class Algorithm {
 
   // 根据值判断二维集合中是否有某一个一维集合
   public static boolean hasList(List<List<Integer>> param, List<Integer> list) {
-    for (List<Integer> single : param) {
+        boolean result = false;
 
-      boolean equal = true;
-      for (Integer singleInteger : single) {
-        if (list.contains(singleInteger)) {
+        for (List<Integer> single : param) {
+            if (single.size() == list.size()) {
+                result = true;
+            } else {
+                continue;
+            }
 
-        } else {
-          equal = false;
+            for (Integer integer : list) {
+                if (!single.contains(integer)) {
+                    result = false;
+                    break;
+                }
+            }
+            if (result == true) {
+                return true;
+            }
         }
-      }
 
-      if (equal == true) {
-        return true;
-      } else {
-        return false;
-      }
+        return result;
     }
-
-    return false;
-  }
 
 
   public static List<Integer> fromTopToBottomAndLeftToRightprint(LinkedList<TreeNode> queue,
