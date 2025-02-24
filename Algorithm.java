@@ -1181,18 +1181,17 @@ public class Algorithm {
 
 
   // 左右翻转
-  public static TreeNode flipBinaryTree(TreeNode root) {
-    if (root == null) {
-      return null;
-    }
-    TreeNode temp = root.left;
-    root.left = root.right;
-    root.right = temp;
-    flipBinaryTree(root.left);
-    flipBinaryTree(root.right);
+  public static void flipBinaryTree(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
 
-    return root;
-  }
+        flipBinaryTree(root.left);
+        flipBinaryTree(root.right);
+    }
 
   /**
      * 根据前序 中序还原一棵树 配套测试方法
