@@ -1381,31 +1381,31 @@ public class Algorithm {
 
   // param=cc2[abc]3[cd]ef
   public static String stringDecode(String param) {
-    String result = "";
-    for (int i = 0; i < param.length(); i++) {
-      char c = param.charAt(i);
-      if (c - '0' <= 9) {
-        int loop = c - '0';
-        String loopString = "";
-        int index = i + 2;
-        while (true) {
-          if (param.charAt(index) == ']') {
-            break;
-          }
-          loopString += param.charAt(index);
-          index++;
+        String result = "";
+        if (param == null) {
+            return result;
         }
 
-        for (int j = 0; j < loop; j++) {
-          result += loopString;
+        for (int i = 0; i < param.length(); i++) {
+            char c = param.charAt(i);
+            if (c - '0' >= 0 && c - '0' <= 9) {
+                int loop = c - '0';
+                int start = i + 2, end = start;
+                while (param.charAt(end) != ']') {
+                    end++;
+                }
+
+                for (int j = 0; j < loop; j++) {
+                    result += param.substring(start, end);
+                }
+                i = end;
+            } else {
+                result += c;
+            }
         }
-        i = index;
-      } else {
-        result = result + c;
-      }
+
+        return result;
     }
-    return result;
-  }
 
 
   // 反转单词
