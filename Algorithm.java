@@ -1194,24 +1194,29 @@ public class Algorithm {
     return root;
   }
 
-  // 根据前序 中序还原一棵树
-  public static TreeNode restoreTree(List<Integer> preorder, List<Integer> midorder) {
-    if (CollectionUtils.isEmpty(preorder)) {
-      return null;
+  /**
+     * 根据前序 中序还原一棵树 配套测试方法
+     * List<Integer> preorder = Lists.newArrayList(12, 3, 1, 2, 9, 5, 8, 22, 33);
+     * List<Integer> midorder = Lists.newArrayList(1, 3, 2, 12, 5, 9, 33, 22, 8);
+     * TreeNode treeNode = restoreTree(preorder, midorder);
+     * printTree(treeNode);
+     */
+    public static TreeNode restoreTree(List<Integer> preorder, List<Integer> midorder) {
+        TreeNode result = null;
+
+        if (preorder == null || preorder.size() == 0) {
+            return result;
+        }
+
+        Integer root = preorder.get(0);
+        int splitIndex = midorder.indexOf(root);
+
+        result = new TreeNode(root);
+        result.left = restoreTree(preorder.subList(1, splitIndex + 1), midorder.subList(0, splitIndex));
+        result.right = restoreTree(preorder.subList(splitIndex + 1, preorder.size()), midorder.subList(splitIndex + 1, midorder.size()));
+
+        return result;
     }
-    Integer integer = preorder.get(0);
-    int index = midorder.indexOf(integer);
-    List<Integer> midLeft = midorder.subList(0, index);
-    List<Integer> midRight = midorder.subList(index + 1, midorder.size());
-
-    List<Integer> leftnext = preorder.subList(1, midLeft.size() + 1);
-    List<Integer> rightnext = preorder.subList(1 + midLeft.size(), preorder.size());
-
-    TreeNode root = new TreeNode(integer);
-    root.left = restoreTree(leftnext, midLeft);
-    root.right = restoreTree(rightnext, midRight);
-    return root;
-  }
 
 
   // 根据数据特点选择方法 这里关键的是 找到第一个正数和代价之间的关系
