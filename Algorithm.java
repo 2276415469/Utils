@@ -947,37 +947,43 @@ public class Algorithm {
 
 
   // 计算岛屿的数量 1为岛屿 0为海
-  public static int numberOfIslands(String[][] grid) {
-    int result = 0;
-    int oneMax = grid.length;
-    int twoMax = grid[0].length;
-    for (int i = 0; i < oneMax; i++) {
-      for (int j = 0; j < twoMax; j++) {
-        if (grid[i][j].equals("1")) {
-          traversalSingleIsland(grid, i, j, oneMax, twoMax);
-          result++;
+ /**
+     int[][] test = {
+         {0, 1, 0}
+         , {0, 0, 0}
+         , {0, 1, 0}
+         , {1, 0, 1} //中间值为0或者1  可以测试两种情况
+         , {0, 1, 0}
+     };
+     */
+  public static int numberOfIslands(int[][] param) {
+        int result = 0;
+        if (param==null){
+            return result;
         }
-      }
+        for (int i = 0; i < param.length; i++) {
+            for (int j = 0; j < param[0].length; j++) {
+                if (param[i][j] == 1) {
+                    result++;
+                    infect(param, i, j);
+                }
+            }
+        }
+        return result;
     }
 
-    return result;
-  }
-
-  public static void traversalSingleIsland(String[][] grid, int oneIndex, int twoIndex, int oneMax,
-      int twoMax) {
-    if (oneIndex >= oneMax || oneIndex < 0 || twoIndex >= twoMax || twoIndex < 0) {
-      return;
+    public static void infect(int[][] param, int i, int j) {
+        if (i < 0 || i >= param.length || j < 0 || j >= param[0].length) {
+            return;
+        }
+        if (param[i][j] == 1) {
+            param[i][j] = 2;
+            infect(param, i + 1, j);
+            infect(param, i - 1, j);
+            infect(param, i, j + 1);
+            infect(param, i, j - 1);
+        }
     }
-    if ("2".equals(grid[oneIndex][twoIndex]) || "0".equals(grid[oneIndex][twoIndex])) {
-      return;
-    }
-    grid[oneIndex][twoIndex] = "2";
-    traversalSingleIsland(grid, oneIndex - 1, twoIndex, oneMax, twoMax);
-    traversalSingleIsland(grid, oneIndex + 1, twoIndex, oneMax, twoMax);
-    traversalSingleIsland(grid, oneIndex, twoIndex - 1, oneMax, twoMax);
-    traversalSingleIsland(grid, oneIndex, twoIndex + 1, oneMax, twoMax);
-
-  }
 
   public static ListNode deleteNFromBottomNode(ListNode head, int n) {
     ListNode loop = head;
