@@ -802,6 +802,28 @@ public class Algorithm {
     return dp[dp.length - 1];
   }
 
+  public static int[] jumpOp(int[] param) {
+        int[] dp = new int[param.length];
+        dp[0] = 1;
+        // 除第一个位置 默认全部到达不了
+        for (int i = 1; i < dp.length; i++) {
+            dp[i] = 1000;
+        }
+        // 遍历所有格子 更新dp矩阵最少步数
+        for (int i = 0; i < param.length; i++) {
+            int stepLength = param[i];
+            int stepTimes = dp[i] + 1;
+            for (int j = i + 1; j < param.length && j <= i + stepLength; j++) {
+                if (stepTimes < dp[j]) {
+                    dp[j] = stepTimes;
+                }
+            }
+
+        }
+
+        return dp;
+    }
+
   // 无序 不重复 有正负数组 找最长连续长度 不允许排序 （找最长连续序列）
   public static int longestContinuous(int[] param) {
     int result = 0;
