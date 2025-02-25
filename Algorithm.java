@@ -1002,15 +1002,16 @@ public class Algorithm {
    */
 
 
-  public static int parseInt(String param) {
-    int result = 0;
-    int jin = 0;
-    for (int i = param.length() - 1; i >= 0; i--) {
-      result += (param.charAt(i) - '0') * Math.pow(10, jin);
-      jin++;
+   public static int parseInt(String param) {
+        int result = 0;
+        if (param == null || param.length() == 0) {
+            return result;
+        }
+        for (int i = param.length() - 1, jin = 0; i >= 0; i--, jin++) {
+            result += (param.charAt(i) - '0') * Math.pow(10, jin);
+        }
+        return result;
     }
-    return result;
-  }
 
 
   // 计算岛屿的数量 1为岛屿 0为海
