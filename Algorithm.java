@@ -35,6 +35,73 @@ public class Algorithm {
 
   }
 
+   /**
+     * 要求返回字符串的全排列 同时需要是排序过的 我们可以直接排序参数然后全排列 或者全排列以后再排序
+     * 数组排序 Arrays.sort()
+     * 集合排序 Collections.sort() 字符串排序规则 从左往右 大写<小写 同样前缀的短的在前 结果为正序
+     */
+
+    public static void sortFullArrangement() {
+        String[] init = {"a", "c", "b"};
+        List<String> param = new ArrayList<>();
+        List<String> result = new ArrayList<>();
+        // Arrays.asList() 返回的list有些方法不支持
+        for (String s : init) {
+            param.add(s);
+        }
+        backtracking(param, "", result);
+        Collections.sort(result);
+        System.out.println("先全排列后排序");
+        for (String s : result) {
+            System.out.print(" " + s);
+        }
+        System.out.println();
+
+        result.clear();
+        param.clear();
+        Arrays.sort(init);
+        for (String s : init) {
+            param.add(s);
+        }
+        Collections.sort(param);
+        backtracking(param, "", result);
+        System.out.println("先排序后全排列");
+        for (String s : result) {
+            System.out.print(" " + s);
+        }
+
+
+    }
+
+    /**
+     * 和不回溯只递归比较 参数数量是一样的 回溯即先删除然后递归最后恢复
+     * param使用同一个 会被删减和恢复
+     * choose保存递归结果
+     * result 保存最后所有的结果
+     *                     init
+     *            a         b         c     for 循环3次
+     *          b   c     a  c       a  b   for 循环两次
+     *          c   b     c  a       b  a   for 循环1次
+     *          N   N     N  N       N  N   直接为空 触发终结条件
+     *          已排序 for从前往后取 就会是上面这种结果
+     */
+    public static void backtracking(List<String> param, String choose, List<String> result) {
+        if (param == null || param.size() == 0) {
+            result.add(choose);
+        }
+        // 需要直接赋值 以免在for循环中调用
+        int loop = param.size();
+
+        for (int i = 0; i < loop; i++) {
+            String single = param.get(i);
+            // 应该用下角标删除 同时在递归后用下角标恢复
+            param.remove(i);
+            backtracking(param, choose + single, result);
+            param.add(i, single);
+
+        }
+
+    }
 
   public static int number(String param) {
     int result = 0;
