@@ -748,21 +748,22 @@ public class Algorithm {
 
   // 找一个数组中总和大于等于target的最短子数组
   public static int minSubArray(int[] param, int target) {
-    int result = 999999;
-    int left = 0;
-    int right = 0;
-    while (right < param.length) {
-      if (sumBetweenLR(param, left, right) >= target) {
-        result = Math.min(result, right - left + 1);
-        left++;
-      } else {
-        right++;
-      }
+        int left = 0, right = 0;
+        int result = 999;
+        while (left < param.length) {
+            if (sumBetweenLR(param, left, right) < target) {
+                if (right < param.length - 1) {
+                    right++;
+                } else {
+                    return result;
+                }
+            } else {
+                result = Math.min(right - left, result) + 1;
+                left++;
+            }
+        }
+        return result;
     }
-
-
-    return result;
-  }
 
   public static int sumBetweenLR(int[] param, int leftIndex, int rightIndex) {
     int result = 0;
