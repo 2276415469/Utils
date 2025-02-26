@@ -2684,6 +2684,7 @@ public class Algorithm {
             while (left < right && param[right] >= target) {
                 right--;
             }
+            // 确保达到终态以后不再改变下角标 因为最后还需要递归 单次的也需要 因为最后有left下角标的赋值
             if (left < right) {
                 param[left] = param[right];
                 left++;
@@ -2692,6 +2693,7 @@ public class Algorithm {
             while (left < right && param[left] < target) {
                 left++;
             }
+            // 确保达到终态以后不再改变下角标 因为最后还需要递归 单次的也需要 因为最后有left下角标的赋值
             if (left < right) {
                 param[right] = param[left];
                 right--;
