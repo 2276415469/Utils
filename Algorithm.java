@@ -481,7 +481,8 @@ public class Algorithm {
   }
 
 
-  // 求根 取整
+  // 求根 取整 和带精度的都是用左右边界方式增加速度 区别在于终结条件 一个是等于 一个是误差小于
+  // 同时边界变换不同 整形只变更一个 精度的变更两边 并且范围用除法来确定 整形通过+-1
   public static int sqrt(int param) {
     if (param < 2) {
       return param;
@@ -507,7 +508,7 @@ public class Algorithm {
 
   }
 
-  // 带精度求根
+  // 带精度求根 
   public static double sqrtPrecision(int num) {
 
     double left = 0;
