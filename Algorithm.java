@@ -565,16 +565,18 @@ public class Algorithm {
       while (param[right] % 2 == 0 && left < right) {
         right--;
       }
-
-      param[left] = param[right];
-      left++;
-
+      if(left < right) {
+       param[left] = param[right];
+       left++;
+      }
+      
       while (param[left] % 2 == 1 && left < right) {
         left++;
       }
-
-      param[right] = param[left];
-      right--;
+      if(left < right) {
+        param[right] = param[left];
+        right--;
+      }
     }
 
     param[left] = temp;
