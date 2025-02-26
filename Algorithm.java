@@ -35,6 +35,20 @@ public class Algorithm {
 
   }
 
+  // 如果需要自己写排序 统一用这个array list均可
+    public static void bubble(int[] road) {
+
+        for (int i = road.length - 1; i >= 0; i--) {
+            for (int j = 0; j <= i && j + 1 <= i; j++) {
+                if (road[j + 1] < road[j]) {
+                    int temp = road[j];
+                    road[j] = road[j + 1];
+                    road[j + 1] = temp;
+                }
+            }
+        }
+    }
+  
    /**
      * 要求返回字符串的全排列 同时需要是排序过的 我们可以直接排序参数然后全排列 或者全排列以后再排序
      * 数组排序 Arrays.sort()
