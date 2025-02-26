@@ -688,6 +688,26 @@ public class Algorithm {
     // printTree(huanyuan,2);
   }
 
+      /**
+     * 判断是否为平衡树 平衡树即所有节点的左右子树高度相差不大于1
+     * 递归规则为 左子树为平衡树 右子树为平衡树 同时左右子树的高度差不大于1 可以返回true
+     */
+    public static boolean isBalanceTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        boolean leftResult = isBalanceTree(root.left);
+        boolean rightResult = isBalanceTree(root.right);
+
+        int leftHeight = treeHeight(root.left);
+        int rightHeight = treeHeight(root.right);
+
+        boolean me = Math.abs(leftHeight - rightHeight) <= 1 ? true : false;
+
+        return leftResult & rightResult & me;
+        
+    }
 
   public static String simplifyUrl(String url) {
 
