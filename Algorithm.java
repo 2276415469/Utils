@@ -368,6 +368,28 @@ public class Algorithm {
     return false;
   }
 
+  // 上面那个是 是否包含 不连续也算 这个是必须准确匹配
+  public static boolean isPrecisionSubString(String ori, String param) {
+        // 规避边界问题
+        for (int i = 0; i < ori.length() - param.length() + 1; i++) {
+            int index = 0;
+            if (ori.charAt(i) == param.charAt(index)) {
+                for (int j = 0; j < param.length(); j++) {
+
+                    if (ori.charAt(i + j) == param.charAt(index)) {
+                        index++;
+                    } else {
+                        break;
+                    }
+                    // 终结条件
+                    if (index == param.length()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
   // 罗马字符转数字
   public static Integer romanNumeral(String param) {
