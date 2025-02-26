@@ -792,19 +792,31 @@ public class Algorithm {
 
 
   // 找一个数组中总和大于等于target的最短子数组
-  public static int minSubArray(int[] param, int target) {
+  /**
+     * DeDuplicateData 特殊处理第一个元素 移动右边 赋值左
+     * noRepeatZi 循环第一行就是加元素 根据是否重复 确定左边界行为
+     * minSubArray 先算最值 再决定移动哪边
+     * 都是滑动窗口问题 最值问题需要数据是排序的 重复与否则不需要 流程一致都是判断条件+移动窗口
+     * 遍历范围用左边界还是右边界 需要根据你的具体算法确定 有时左右边界都可以效果是一样的
+     * 需不需要特殊处理0 1 也是看需求 DeDuplicateData中就需要特殊对待第一个元素
+     * 还需要注意的是当右边界到结尾时 往往都是可以return的
+     */
+    public static int minSubArray(List<Integer> param, int target) {
         int left = 0, right = 0;
         int result = 999;
-        while (left < param.length) {
-            if (sumBetweenLR(param, left, right) < target) {
-                if (right < param.length - 1) {
-                    right++;
-                } else {
+        if (param == null || param.size() == 0) {
+            return result;
+        }
+        while (left < param.size()) {
+            int sum = sum(param.subList(left, right));
+            if (sum >= target) {
+                result = Math.min(result, right - left);
+                left++;
+            } else {
+                if (right == param.size()) {
                     return result;
                 }
-            } else {
-                result = Math.min(right - left, result) + 1;
-                left++;
+                right++;
             }
         }
         return result;
