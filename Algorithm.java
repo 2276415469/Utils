@@ -116,7 +116,7 @@ public class Algorithm {
         }
 
     }
-
+  // 26进制 变成10进制
   public static int number(String param) {
     int result = 0;
     double jin = 26d;
