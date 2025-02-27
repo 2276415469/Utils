@@ -35,6 +35,26 @@ public class Algorithm {
 
   }
 
+  // 问题可以被前置问题叠加解决的就是dp问题 通过这个来看如何写代码 之后只需找到传递函数即可
+  // 有正负的数组 找连续最大数组和
+    public static int maxSubArray(int[] param) {
+        int result = 0;
+        if (param == null || param.length == 0) {
+            return result;
+        }
+        if (param.length == 1) {
+            return param[0];
+        }
+        int[] dp = new int[param.length];
+        dp[0] = param[0];
+        for (int i = 1; i < param.length; i++) {
+            dp[i] = Math.max(param[i], dp[i - 1] + param[i]);
+            result = Math.max(result, dp[i]);
+        }
+
+        return result;
+    }
+ 
   // 反转字符串有变种 需要指定的字符串保留原顺序 思路为把原字符串反转 把目标字符串的反转保存下来 使用replaceAll替换为原字符串
  
   // 如果需要自己写排序 统一用这个array list均可
