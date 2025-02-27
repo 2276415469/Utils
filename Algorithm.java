@@ -1031,6 +1031,43 @@ public class Algorithm {
 
   }
 
+  // 奇数点返回中间 偶数则是返回偏后的 边界统一用快指针
+
+    public static ListNode seekMid(ListNode root) {
+        if (root == null) {
+            return null;
+        }
+        ListNode slow = root, quick = root;
+        while (quick != null && quick.next != null) {
+            slow = slow.next;
+            quick = quick.next.next;
+        }
+        return slow;
+    }
+    // 寻找倒数第k个 快慢并不只是走的快慢 也可能是位置的前后 边界的确定通常需要自己举例验证
+
+    public static ListNode seekNReciprocal(ListNode root, int k) {
+        if (root == null) {
+            return null;
+        }
+        ListNode slow = root, quick = root;
+        for (int i = 0; i < k - 1; i++) {
+            if (quick == null) {
+                return null;
+            }
+            quick = quick.next;
+        }
+        if (quick == null) {
+            return null;
+        }
+
+        while (quick.next != null) {
+            slow = slow.next;
+            quick = quick.next;
+        }
+        return slow;
+    }
+
   /**
    *     1
    *    2  3
