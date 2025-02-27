@@ -198,6 +198,7 @@ public class Algorithm {
 
 
   // 一个数字在一个排序集合中第一次和最后一次出现的下角标
+  // 二分法完成 就是先二分找到一个 因为都连着 从找到的那一个向前，向后找 即为最终答案
   public static List<Integer> seekFirstAndLastIndex(int[] param, int target) {
     List<Integer> result = new ArrayList<>();
     int left = 0;
