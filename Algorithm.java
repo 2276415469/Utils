@@ -239,7 +239,8 @@ public class Algorithm {
     return result;
 
   }
-
+  // 用二分法在一个排序的数组中找到最大值 
+  // 凡是设计到二分法 最后用left作为划分 主要原因是 mid计算中不足1会舍去 剩余两个元素时 无论如何划分 left总在正确位置
   public static Integer seekPeak(int[] param) {
 
     int left = 0;
@@ -261,25 +262,24 @@ public class Algorithm {
   // 去重list中的list 重复返回true
   // 如果使用set进行去重 [1,2] [1,2]会去重 [1,2] [2,1]不会去重 [1,2][1,2,2]也不会去重 明显无法满足顺序无关性
   public static boolean isDuplicate(List<List<Integer>> param, List<Integer> target) {
-    for (List<Integer> integers : param) {
-      // 判断单个list和list是否相等 所以结果在这一层
-      boolean result = true;
-      for (Integer integer : integers) {
-        if (target.contains(integer)) {
+        boolean result = false;
+        for (List<Integer> single : param) {
+            if (single.size() == target.size()) {
+                result = true;
+                for (Integer integer : single) {
+                    if (target.contains(integer)) {
 
-        } else {
-          // 不重复
-          result = false;
+                    } else {
+                        result = false;
+                    }
+                }
+                if (result == true) {
+                    return true;
+                }
+            }
         }
-      }
-      // 是否完全相等
-      if (result == true) {
-        return true;
-      }
+        return result;
     }
-    return false;
-
-  }
 
   // 优化点？排序再取值 我们可以直接计算一下时间复杂度
   // 先排序 首先排序 就需要nlog2n 取值过程需要x3 负优化
