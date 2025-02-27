@@ -35,6 +35,8 @@ public class Algorithm {
 
   }
 
+  // 反转字符串有变种 需要指定的字符串保留原顺序 思路为把原字符串反转 把目标字符串的反转保存下来 使用replaceAll替换为原字符串
+ 
   // 如果需要自己写排序 统一用这个array list均可
     public static void bubble(int[] road) {
 
