@@ -152,49 +152,35 @@ public class Algorithm {
   }
 
   public static String binarySum(String param1, String param2) {
-    String result = "";
-    String max = "", min = "";
-    if (param1.length() > param2.length()) {
-      max = param1;
-      min = param2;
-    } else {
-      max = param2;
-      min = param1;
-    }
-    for (int i = 0; i < max.length() - min.length(); i++) {
-      min = "0" + min;
-    }
-    int jin = 0;
-    for (int i = max.length() - 1; i >= 0; i--) {
-      char c = max.charAt(i);
-      char c2 = min.charAt(i);
+        String result = "";
+        String max = "", min = "";
+        if (param1.length() > param2.length()) {
+            max = param1;
+            min = param2;
+        } else {
+            max = param2;
+            min = param1;
+        }
+        int loop = max.length() - min.length();
+        // for循环的判断条件中的变量 不允许被修改
+        for (int i = 0; i < loop; i++) {
+            min = "0" + min;
+        }
+        int jin = 0;
+        for (int i = max.length() - 1; i >= 0; i--) {
+            char c = max.charAt(i);
+            char c2 = min.charAt(i);
 
-      int i1 = jin + c - '0' + c2 - '0';
-      switch (i1) {
-        case 0:
-          result = "0" + result;
-          jin = 0;
-          break;
-        case 1:
-          result = "1" + result;
-          jin = 0;
-          break;
-        case 2:
-          result = "0" + result;
-          jin = 1;
-          break;
-        case 3:
-          result = "1" + result;
-          jin = 1;
-          break;
-      }
-    }
-    if (jin == 1) {
-      result = "1" + result;
-    }
+            int i1 = jin + c - '0' + c2 - '0';
+            result = i1 % 10 + result;
+            jin = i1 / 10;
+        }
+        if (jin == 1) {
+            result = "1" + result;
+        }
 
-    return result;
-  }
+        return result;
+    }
 
 
   // 一个数字在一个排序集合中第一次和最后一次出现的下角标
