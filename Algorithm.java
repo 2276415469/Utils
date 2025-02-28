@@ -290,17 +290,28 @@ public class Algorithm {
         return result;
     }
 
-  // 优化点？排序再取值 我们可以直接计算一下时间复杂度
-  // 先排序 首先排序 就需要nlog2n 取值过程需要x3 负优化
-  // 此方法 nx3 O(n)
+  // 三数之和为n的组合 n=0 就是经典的三数之和问题 如果结果需要去重使用以下代码
+      /**
+     List<List<Integer>> collect = result.stream().map(
+         list -> {
+         List<Integer> integers = new ArrayList<>(list);
+         Collections.sort(integers);
+         return integers;
+     }).distinct().collect(Collectors.toList());
+
+     Arrays.stream(result).distinct.toArray();
+     */
   public static void threeNumberSum(List<Integer> param, int target, List<Integer> choose,
       List<List<Integer>> result) {
-    if (choose.size() > 3) {
-      return;
-    }
-    if (choose.size() == 3 && sum(choose) == target) {
-      result.add(choose);
-    }
+    if (choose.size() == 3) {
+            if (choose.stream().mapToInt(Integer::intValue).sum() == target) {
+                // 不在最后去重的话 就需要在这里进行去重 判断是否包含这个list
+                result.add(choose);
+                return;
+            } else {
+                return;
+            }
+        }
 
     for (int i = 0; i < param.size(); i++) {
       List<Integer> nextParam = new ArrayList<>();
