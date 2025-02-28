@@ -35,6 +35,43 @@ public class Algorithm {
 
   }
 
+  // decode字符串，比如“1(bb3(a))”，解析后应该是”bbaaa”，栈实现方法
+    // 只循环参数一遍 最后结果保存在字符串栈中
+    public static String decode(String param) {
+        String result = "";
+        LinkedList<Integer> intStack = new LinkedList<>();
+        LinkedList<Character> strStack = new LinkedList<>();
+
+        for (int i = 0; i < param.length(); i++) {
+            char c = param.charAt(i);
+            if (c >= '0' && c <= '9') {
+                intStack.add(c - '0');
+            } else {
+                if (c == ')') {
+                    Integer loop = intStack.pollLast();
+                    String temp = "";
+                    Character character = strStack.pollLast();
+                    while (character != '(') {
+                        temp = character + temp;
+                        character = strStack.pollLast();
+                    }
+
+                    for (int j = 0; j < loop; j++) {
+                        for (int k = 0; k < temp.length(); k++) {
+                            strStack.add(temp.charAt(k));
+                        }
+                    }
+                } else {
+                    strStack.add(c);
+                }
+            }
+        }
+        for (Character character : strStack) {
+            result += character;
+        }
+        return result;
+    }
+ 
   // 问题可以被前置问题叠加解决的就是dp问题 通过这个来看如何写代码 之后只需找到传递函数即可
   // 有正负的数组 找连续最大数组和
     public static int maxSubArray(int[] param) {
