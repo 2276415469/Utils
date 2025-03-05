@@ -34,6 +34,35 @@ public class Algorithm {
   public static void main(String[] args) throws FileNotFoundException {
 
   }
+ // 寻找两个节点的最近公共祖先 其实就是两种情况 在一边和不在一边 不在一边就都能找到 返回自己即可  在一边 则是找到在上面的即可
+ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null){
+            return null;
+        }
+        if(root.val==p.val){
+            return p;
+        }
+        if(root.val==q.val){
+            return q;
+        }
+
+        TreeNode leftR = lowestCommonAncestor(root.left,p,q);
+        TreeNode rightR = lowestCommonAncestor(root.right,p,q);
+
+        if(leftR!=null && rightR!=null){
+            return root;
+        }
+        if(leftR==null && rightR==null){
+            return null;
+        }
+        if(leftR!=null){
+            return leftR;
+        }
+        if(rightR!=null){
+            return rightR;
+        }
+        return null;
+    }
 
   // decode字符串，比如“1(bb3(a))”，解析后应该是”bbaaa”，栈实现方法
     // 只循环参数一遍 最后结果保存在字符串栈中
