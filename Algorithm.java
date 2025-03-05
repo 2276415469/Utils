@@ -787,6 +787,7 @@ public class Algorithm {
       /**
      * 判断是否为平衡树 平衡树即所有节点的左右子树高度相差不大于1
      * 递归规则为 左子树为平衡树 右子树为平衡树 同时左右子树的高度差不大于1 可以返回true
+      时间复杂度为n2 原因是 height方法为n root有n个节点 那就是NxN=N2
      */
     public static boolean isBalanceTree(TreeNode root) {
         if (root == null) {
