@@ -1938,7 +1938,7 @@ public class Algorithm {
 
 
   /**
-   * 寻找第k大的数
+   * 寻找第k大的数 时间复杂度O（n） 最坏的时候是已经有序了 这时候递归深度会增加 不再是logn而是n 复杂度就会变成n2
    */
   public static int seekKNumber(int[] param, int k, int leftIndex, int rightIndex) {
     if (leftIndex > rightIndex) {
