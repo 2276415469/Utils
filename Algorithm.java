@@ -34,6 +34,26 @@ public class Algorithm {
   public static void main(String[] args) throws FileNotFoundException {
 
   }
+
+    /**
+     * 有序数组变成二叉搜索树 采用找中间点然后分支递归的方式解决
+     * 也可以变种为任意数组变成搜索树 那就需要加入排序过程
+     * 递归如果是array需要传left right边界 如果是list那就不需要因为在递归的以后已经subList截取过了
+     */
+
+    public static TreeNode sortedArrayToBST(List<Integer> list) {
+        if (list.size() == 0) {
+            return null;
+        }
+        int mid = list.size() / 2;
+        TreeNode result = new TreeNode(list.get(mid));
+        result.left = sortedArrayToBST(list.subList(0, mid));
+        result.right = sortedArrayToBST(list.subList(mid + 1, list.size()));
+
+        return result;
+
+    }
+ 
  // 寻找两个节点的最近公共祖先 其实就是两种情况 在一边和不在一边 不在一边就都能找到 返回自己即可  在一边 则是找到在上面的即可
  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root==null){
