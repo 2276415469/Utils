@@ -2584,52 +2584,53 @@ public class Algorithm {
 
 
   // 合并区间 要善于利用while 还需要会处理特殊区间 能统一的逻辑 也要合并
-  public static void foo(List<List<Integer>> param) {
-    List<List<Integer>> result = new ArrayList<>();
-    // 有无触发过合并
-    boolean needRecursion = false;
+  public static int[][] merge(int[][] intervals) {
+        // 为了第一次循环进入 赋值为true
+        boolean isMerged = true;
+        // 下一次新的循环数组不知道大小所以需要使用list
+        List<int[]> loopList = new ArrayList<>();
+        for (int[] interval : intervals) {
+            loopList.add(interval);
+        }
+        // 当一次都没有合并过 说明已经合并结束了
+        while (isMerged == true) {
+            isMerged = false;
+            List<int[]> temp = new ArrayList<>();
+            for (int i = 0; i < loopList.size(); i++) {
+                if (isMerge(loopList, i, i + 1)) {
+                    isMerged = true;
+                    int[] ints = new int[2];
+                    ints[0] = loopList.get(i)[0];
+                    ints[1] = loopList.get(i + 1)[1];
+                    temp.add(ints);
+                    i++;
+                } else {
+                    temp.add(loopList.get(i));
+                }
+            }
+            loopList = temp;
+        }
 
-    int i = 0;
-    while (i < param.size()) {
-      if (i == param.size() - 1) {
-        result.add(param.get(i));
-        i++;
-        continue;
-      }
+        int[][] result = new int[loopList.size()][];
+        for (int i = 0; i < loopList.size(); i++) {
+            result[i] = loopList.get(i);
+        }
 
-      if (isIntersection(param.get(i), param.get(i + 1))) {
-        List<Integer> integers = mergeInterval(param.get(i), param.get(i + 1));
-        result.add(integers);
-        i = i + 2;
-        needRecursion = true;
-        continue;
-      }
-
-      result.add(param.get(i));
-      i++;
+        return result;
     }
 
-    if (needRecursion) {
-      foo(result);
-    } else {
-      System.out.println(result.toString());
+    public static boolean isMerge(List<int[]> intervals, int leftIndex, int rightIndex) {
+        // 边界问题这里解决
+        if (rightIndex >= intervals.size()) {
+            return false;
+        }
+        if (intervals.get(leftIndex)[1] >= intervals.get(rightIndex)[0]) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
-  }
-
-
-  public static boolean isIntersection(List<Integer> param1, List<Integer> param2) {
-    if (param1.get(1) >= param2.get(0)) {
-      return true;
-    }
-    return false;
-  }
-
-  public static List<Integer> mergeInterval(List<Integer> param1, List<Integer> param2) {
-    List<Integer> list = new ArrayList<>();
-    list.add(param1.get(0));
-    list.add(param2.get(1));
-    return list;
-  }
 
 
   // 无重复的最长子串长度 滑动窗口 左右维护
