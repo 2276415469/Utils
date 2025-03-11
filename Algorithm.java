@@ -1988,6 +1988,8 @@ public class Algorithm {
 
   /**
    * 寻找第k大的数 时间复杂度O（n） 最坏的时候是已经有序了 这时候递归深度会增加 不再是logn而是n 复杂度就会变成n2
+   * k大 如果是正序排就是从后往前数 这里建议传值k进来就是索引值 不需要再进行转换 
+   * seekNumber(param,param.length-k,leftIndex,rightIndex) 直接比较k和left的大小即可
    */
   public static int seekKNumber(int[] param, int k, int leftIndex, int rightIndex) {
     if (leftIndex > rightIndex) {
