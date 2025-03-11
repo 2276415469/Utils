@@ -26,7 +26,11 @@ import com.machloop.alpha.common.util.DateUtils;
 
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
-
+    /**
+     * 线程安全的list CopyOnWriteArrayList
+     * hashMap ConcurrentHashMap
+     * 栈和队列 ConcurrentLinkedDeque
+     */
 
 public class Algorithm {
  volatile static   int flag = 0; 
