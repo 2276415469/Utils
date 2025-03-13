@@ -1854,7 +1854,7 @@ public class Algorithm {
   }
 
 
-  // 路径和是否可以满足为某值
+  // 路径和是否可以满足为某值 计算路径和时需要注意 两个子节点都是null的才算是到了叶子节点
   public static boolean pathSum(TreeNode root, int targetValue, int currentValue) {
     if (root == null) {
       return false;
