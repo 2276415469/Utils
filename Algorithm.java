@@ -39,6 +39,15 @@ public class Algorithm {
 
   }
 
+     public static void diagonalTraversal(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return;
+        }
+        for (int i = 0, j = matrix[0].length - 1; i < matrix.length && j >= 0; i++, j--) {
+            System.out.println(matrix[i][j]);
+        }
+    }
+    
     /**
      * 有序数组变成二叉搜索树 采用找中间点然后分支递归的方式解决
      * 也可以变种为任意数组变成搜索树 那就需要加入排序过程
