@@ -1881,6 +1881,21 @@ public class Algorithm {
     return false;
   }
 
+    //树的最大路径和
+    static int maxPathSumUse = 0;
+
+    public static int maxGain(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftResult = maxGain(root.left);
+        int rightResult = maxGain(root.right);
+        // 最后值在这里更新 自己作为桥梁时候的比较
+        maxPathSumUse = Math.max(maxPathSumUse, leftResult + rightResult + root.val);
+        // 返回只能返回一半 
+        return root.val + Math.max(leftResult, rightResult);
+    }
+
 
   // 二叉搜索树中两节点的公共祖先
   // 定义 左子树的所有节点值小于 右子树的所有节点值大于 左右子树也分别是二叉搜索树 不允许有重复的键值
