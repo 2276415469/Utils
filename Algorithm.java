@@ -38,7 +38,40 @@ public class Algorithm {
   public static void main(String[] args) throws FileNotFoundException {
 
   }
+    // 1->2->3->4->5->6   1->6->2->5->3->4 重排链表
+    public static void foldLink(ListNode root) {
+        // 要折叠链表需要有可以寻到每个节点的能力 所以用list存储
+        List<ListNode> list = new ArrayList<>();
+        ListNode loop = root;
+        while (loop != null) {
+            list.add(loop);
+            loop = loop.next;
+        }
 
+        int left = 0, right = list.size() - 1;
+        // 从左边第一个节点开始
+        loop = list.get(left);
+        // 保存最后返回的结果 链表常有的操作
+        ListNode result = loop;
+        while (left < right) {
+            loop.next = list.get(right);
+            right--;
+            loop = loop.next;
+            // 经常有的左右边界碰撞判断
+            if (left < right) {
+                left++;
+                loop.next = list.get(left);
+                loop = loop.next;
+            }
+        }
+        // 结尾赋值为null 避免出现循环现象
+        loop.next = null;
+        // 返回值为void
+        root = result;
+    }
+
+    
+    // 对角线遍历
      public static void diagonalTraversal(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
             return;
