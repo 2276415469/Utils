@@ -101,31 +101,28 @@ public class Algorithm {
     }
  
  // 寻找两个节点的最近公共祖先 其实就是两种情况 在一边和不在一边 不在一边就都能找到 返回自己即可  在一边 则是找到在上面的即可
- public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root==null){
+//    也是先比较自己 如果自己是其中一个就返回 自己不是就比较左和右 根据结果判断返回什么 核心思想是把结果从下面传上去
+    public static TreeNode lowestCommonAncestor(TreeNode root,int one, int two){
+        if (root==null){
             return null;
         }
-        if(root.val==p.val){
-            return p;
-        }
-        if(root.val==q.val){
-            return q;
-        }
-
-        TreeNode leftR = lowestCommonAncestor(root.left,p,q);
-        TreeNode rightR = lowestCommonAncestor(root.right,p,q);
-
-        if(leftR!=null && rightR!=null){
+        if (root.val==one || root.val==two){
             return root;
         }
-        if(leftR==null && rightR==null){
+
+        final TreeNode leftResult = lowestCommonAncestor(root.left, one, two);
+        final TreeNode rightResult = lowestCommonAncestor(root.right, one, two);
+        if (leftResult!=null && rightResult!=null){
+            return root;
+        }
+        if (leftResult==null && rightResult==null){
             return null;
         }
-        if(leftR!=null){
-            return leftR;
+        if (leftResult==null && rightResult!=null){
+            return rightResult;
         }
-        if(rightR!=null){
-            return rightR;
+        if (leftResult!=null && rightResult==null){
+            return leftResult;
         }
         return null;
     }
