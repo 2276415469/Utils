@@ -38,6 +38,70 @@ public class Algorithm {
   public static void main(String[] args) throws FileNotFoundException {
 
   }
+
+    /**
+     * 给定一个由小写英文字母组成的矩形矩阵board和一个字符串word，你的任务是计算word在矩阵中沿水平向右、垂直向下和对角线向右下这三个方向出现的次数
+     */
+    public static int occurrenceNumber() {
+        int result = 0;
+        String[][] param = {
+                {"a", "b", "c", "d", "a", "b", "c"}
+                , {"b", "b", "r", "t", "a", "b", "c"}
+                , {"c", "b", "r", "t", "a", "b", "c"}
+                , {"d", "b", "r", "t", "a", "b", "c"}
+        };
+
+        String match = "abc";
+
+        //        水平
+        for (int i = 0; i < param.length; i++) {
+            for (int j = 0; j < param[0].length; j++) {
+                int index = 0;
+                while (j < param[0].length && param[i][j].equals(match.charAt(index) + "") ) {
+                    index++;
+                    j++;
+                    if (index == match.length() - 1) {
+                        result++;
+                        index = 0;
+                    }
+                }
+
+            }
+        }
+//        竖直
+        for (int i = 0; i < param[0].length; i++) {
+            for (int j = 0; j < param.length; j++) {
+                int index = 0;
+                while ( j < param.length && param[j][i].equals(match.charAt(index) + "") ) {
+                    index++;
+                    j++;
+                    if (index == match.length() - 1) {
+                        result++;
+                        index = 0;
+                    }
+                }
+
+            }
+        }
+        //        对角线
+        for (int i = 0; i < param.length; i++) {
+            for (int j = 0; j < param[0].length; j++) {
+                int index = 0;
+                while (j < param[0].length && i < param.length && param[i][j].equals(match.charAt(index) + "")) {
+                    index++;
+                    j++;
+                    i++;
+                    if (index == match.length() - 1) {
+                        result++;
+                        index = 0;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    
     // 1->2->3->4->5->6   1->6->2->5->3->4 重排链表
     public static void foldLink(ListNode root) {
         // 要折叠链表需要有可以寻到每个节点的能力 所以用list存储
