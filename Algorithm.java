@@ -38,7 +38,24 @@ public class Algorithm {
   public static void main(String[] args) throws FileNotFoundException {
 
   }
+    // 经常有双层list判断重复的需求 之前的流处理-排序-distinct 会导致最终结果顺序被排序过导致不符合输出 所有用这个方法最为保险
+    public static boolean listContains(List<List<Integer>> matrix, List<Integer> param) {
+        for (List<Integer> integerList : matrix) {
+            boolean isEquals = true;
+            for (Integer integer : param) {
+                if (integerList.contains(integer)) {
 
+                } else {
+                    isEquals = false;
+                }
+            }
+            if (isEquals == true) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * 给定一个由小写英文字母组成的矩形矩阵board和一个字符串word，你的任务是计算word在矩阵中沿水平向右、垂直向下和对角线向右下这三个方向出现的次数
      */
