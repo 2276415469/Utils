@@ -38,6 +38,42 @@ public class Algorithm {
   public static void main(String[] args) throws FileNotFoundException {
 
   }
+
+    // 一个链表 两个为一组交换位置 如果是奇数最后一个不交换位置
+    public static ListNode exchangeInPairs(ListNode root){
+        ListNode result =null;
+
+        ListNode loop = root;
+        List<ListNode> objects = new ArrayList<>();
+        while (loop!= null){
+            objects.add(loop);
+            loop = loop.next;
+        }
+
+        List<ListNode> after = new ArrayList<>();
+
+        for (int i = 0; i < objects.size(); i=i+2) {
+            if (i +1< objects.size()){
+                after.add(objects.get(i+1));
+            }
+            after.add(objects.get(i));
+        }
+
+        ListNode loop2 = null;
+        for (int i = 0; i < after.size(); i++) {
+            if (i==0){
+                result = after.get(i);
+                loop2 = result;
+            }else {
+                loop2.next = after.get(i);
+                loop2 = loop2.next;
+            }
+        }
+        loop2.next = null;
+
+        return result;
+    }
+    
     // 经常有双层list判断重复的需求 之前的流处理-排序-distinct 会导致最终结果顺序被排序过导致不符合输出 所有用这个方法最为保险
     public static boolean listContains(List<List<Integer>> matrix, List<Integer> param) {
         for (List<Integer> integerList : matrix) {
